@@ -33,7 +33,7 @@ public class PostfixEvaluator {
             } 
 
 
-            if (token.length() == 1 && token.matches("\\+|\\/|\\*|\\-")) {
+            if (token.length() == 1 && token.matches("\\+|\\/|\\*|\\-|\\^")) {
                 try {
                     double first = stack.pop();
                     double second = stack.pop();
@@ -45,6 +45,8 @@ public class PostfixEvaluator {
                         stack.push(first * second);
                     } else if (token.equals("/")) {
                         stack.push(first / second);
+                    } else if (token.equals("^")) {
+                        stack.push(Math.pow(second, first));
                     }
                 } catch (EmptyStackException emptyStackException) {
                     throw new InvalidPostFixExpressionException();
